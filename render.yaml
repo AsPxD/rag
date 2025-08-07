@@ -3,11 +3,16 @@ services:
   - type: web
     name: medical-chatbot-backend
     runtime: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    buildCommand: |
+      pip install --upgrade pip
+      pip install -r requirements.txt
+    startCommand: uvicorn app:app --host 0.0.0.0 --port $PORT
     plan: free
-    branch: main  # or your default branch
+    branch: main
     envVars:
       - key: GOOGLE_API_KEY
-        sync: false  # You'll set this manually in Render dashboard
-    autoDeploy: true  # Enables automatic deployment on git push
+        sync: false
+      - key: PYTHONUNBUFFERED
+        value: "1"
+    autoDeploy: true
+    healthCheckPath: /health
