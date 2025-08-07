@@ -1,0 +1,9 @@
+google-generativeai
+langchain
+langchain-community
+langchain-google-genai
+pypdf  # Optional but useful for PDF loading in your script
+faiss-cpu  # For FAISS vector store
+fastapi
+uvicorn
+python-dotenv  # For loading environment variables from .env file
