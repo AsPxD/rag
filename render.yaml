@@ -1,18 +1,16 @@
 # render.yaml
 services:
   - type: web
-    name: medical-chatbot-backend
-    runtime: python
-    buildCommand: |
-      pip install --upgrade pip
-      pip install -r requirements.txt
-    startCommand: uvicorn app:app --host 0.0.0.0 --port $PORT
-    plan: free
-    branch: main
+    name: medical-rag-api
+    env: docker
+    dockerfilePath: ./Dockerfile
+    plan: starter
+    region: oregon
     envVars:
       - key: GOOGLE_API_KEY
         sync: false
-      - key: PYTHONUNBUFFERED
-        value: "1"
-    autoDeploy: true
     healthCheckPath: /health
+    autoDeploy: true
+    scaling:
+      minInstances: 1
+      maxInstances: 5
